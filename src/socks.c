@@ -208,7 +208,7 @@ void * sockschild(struct clientparam* param) {
 		*SAPORT(&param->sinsl) = 0;
 		if(so._bind(param->remsock,(struct sockaddr *)&param->sinsl,SASIZE(&param->sinsl)))RETURN (12);
 #if SOCKSTRACE > 0
-fprintf(stderr, "%hu bound to communicate with server\n", *SAPORT(&param->sins));
+fprintf(stderr, "%hu bound to communicate with server\n", *SAPORT(&param->sinsl));
 fflush(stderr);
 #endif
 	}
@@ -313,12 +313,11 @@ fflush(stderr);
                     		    fcntl(param->remsock,F_SETFL,O_NONBLOCK | fcntl(param->remsock,F_GETFL));
 #endif
             			}
-
 #if SOCKSTRACE > 0
 fprintf(stderr, "Sending incoming connection to client with code %d for %s with %hu\n",
 			param->res,
 			commands[command],
-			*SAPORT(param->sins);
+			*SAPORT(&param->sinsr)
 	);
 fflush(stderr);
 #endif
@@ -402,8 +401,8 @@ fflush(stderr);
 							param->nwrites++;
 #if SOCKSTRACE > 1
 fprintf(stderr, "UDP packet relayed from client to %s:%hu size %d, header %d\n",
-			inet_ntoa(param->sins.sin_addr),
-			ntohs(param->sins.sin_port),
+			inet_ntoa(param->sinsr.sin_addr),
+			ntohs(param->sinsr.sin_port),
 			(len - i),
 			i
 	);
