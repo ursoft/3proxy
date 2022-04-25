@@ -1045,17 +1045,17 @@ static void * itcopy (void * from, size_t size){
 }
 
 
-struct auth * copyauth (struct auth * authfuncs){
+struct auth * copyauth (struct auth *a_authfuncs){
 	struct auth * newauth = NULL;
 
- 	newauth = itcopy(authfuncs, sizeof(struct auth));
-	for( authfuncs=newauth; authfuncs; authfuncs = authfuncs->next){
-		if(authfuncs->next){
-			authfuncs->next = itcopy(authfuncs->next, sizeof(struct auth));
-			if(!authfuncs->next)break;
+ 	newauth = itcopy(a_authfuncs, sizeof(struct auth));
+	for( a_authfuncs=newauth; a_authfuncs; a_authfuncs = a_authfuncs->next){
+		if(a_authfuncs->next){
+			a_authfuncs->next = itcopy(a_authfuncs->next, sizeof(struct auth));
+			if(!a_authfuncs->next)break;
 		}
 	}
-	if(authfuncs){
+	if(a_authfuncs){
 		freeauth(newauth);
 		return NULL;
 	}
@@ -1268,8 +1268,8 @@ void * itfree(void *data, void * retval){
 	return retval;
 }
 
-void freeauth(struct auth * authfuncs){
-	for(; authfuncs; authfuncs = (struct auth *)itfree(authfuncs, authfuncs->next));
+void freeauth(struct auth * a_authfuncs){
+	for(; a_authfuncs; a_authfuncs = (struct auth *)itfree(a_authfuncs, a_authfuncs->next));
 }
 
 void freeacl(struct ace *ac){

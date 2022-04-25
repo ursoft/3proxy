@@ -1,0 +1,19 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "make clean",
+      "appliesTo": "/",
+      "type": "launch",
+      "command": "nmake",
+      "args": [ "-f", "Makefile.debug", "clean" ]
+    },
+    {
+        "taskLabel": "make debug",
+        "appliesTo": "/",
+        "type": "launch",
+        "command": "nmake",
+        "args": [ "-f", "Makefile.debug" ]
+    }
+  ]
+}

@@ -301,7 +301,7 @@ int radsend(struct clientparam * param, int auth, int stop){
 	int loop;
 	int id;
 	int res = 4;
-	SOCKET sockfd = -1;
+	SOCKET sockfd = (SOCKET)-1;
 	unsigned char *ptr;
 	int total_length;
 	int len;

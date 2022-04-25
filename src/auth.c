@@ -812,18 +812,18 @@ int cacheauth(struct clientparam * param){
 
 int doauth(struct clientparam * param){
 	int res = 0;
-	struct auth *authfuncs;
+	struct auth *a_authfuncs;
 	struct authcache *ac;
 	char * tmp;
 	int ret = 0;
 
-	for(authfuncs=param->srv->authfuncs; authfuncs; authfuncs=authfuncs->next){
-		res = authfuncs->authenticate?(*authfuncs->authenticate)(param):0;
+	for(a_authfuncs=param->srv->authfuncs; a_authfuncs; a_authfuncs=a_authfuncs->next){
+		res = a_authfuncs->authenticate?(*a_authfuncs->authenticate)(param):0;
 		if(!res) {
-			if(authfuncs->authorize &&
-				(res = (*authfuncs->authorize)(param)))
+			if(a_authfuncs->authorize &&
+				(res = (*a_authfuncs->authorize)(param)))
 					return res;
-			if(conf.authcachetype && authfuncs->authenticate && authfuncs->authenticate != cacheauth && param->username && (!(conf.authcachetype&4) || (!param->pwtype && param->password))){
+			if(conf.authcachetype && a_authfuncs->authenticate && a_authfuncs->authenticate != cacheauth && param->username && (!(conf.authcachetype&4) || (!param->pwtype && param->password))){
 				pthread_mutex_lock(&hash_mutex);
 				for(ac = authc; ac; ac = ac->next){
 					if(

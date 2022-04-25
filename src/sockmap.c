@@ -53,11 +53,11 @@ int sockmap(struct clientparam * param, int timeo, int usesplice){
  int CLIENTTERM = 0, SERVERTERM = 0;
  int after = 0;
  struct pollfd fds[6];
- struct pollfd *fdsp = fds;
+ //struct pollfd *fdsp = fds;
  int fdsc = 0;
  int sleeptime = 0;
  FILTER_ACTION action;
- int res;
+ int res=0;
  SASIZETYPE sasize;
  int needaction = 0;
 

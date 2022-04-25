@@ -452,7 +452,7 @@ for(;;){
 		continue;
 	}
 	if(param->transparent && i > 6 && !strncasecmp((char *)buf + inbuf, "Host:", 5)){
-		unsigned char c;
+		unsigned char c=0;
 		sb = (unsigned char *)strchr((char *)(buf+inbuf), ':');
 		if(!sb)continue;
 		++sb;
@@ -581,7 +581,6 @@ for(;;){
  if(ftp && param->redirtype != R_HTTP){
 	SOCKET s;
 	int mode = 0;
-	int i=0;
 
 	inftpbuf = 0;
 	if(!ckeepalive){
@@ -783,7 +782,7 @@ for(;;){
 					if(!headsent++){
 						socksend(param->clisock, (unsigned char *)proxy_stringtable[9], (int)strlen(proxy_stringtable[9]), conf.timeouts[STRING_S]);
 					}
-					if((unsigned)socksend(param->clisock, buf, inbuf, conf.timeouts[STRING_S]) != inbuf){
+					if(socksend(param->clisock, buf, inbuf, conf.timeouts[STRING_S]) != inbuf){
 						RETURN(781);
 					}
 					inbuf = 0;

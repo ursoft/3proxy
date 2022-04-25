@@ -554,7 +554,7 @@ void * adminchild(struct clientparam* param) {
 	case 'F':
 		{
 			FILE *fp;
-			char buf[256];
+			char buf2[256];
 
 			fp = confopen();
 			if(!fp){
@@ -563,8 +563,8 @@ void * adminchild(struct clientparam* param) {
 			}
 				printstr(&pp, "<h3>Please be careful editing config file remotely</h3>");
 				printstr(&pp, "<form method=\"POST\" action=\"/U\" enctype=\"application/x-www-form-urlencoded\"><textarea cols=\"80\" rows=\"30\" name=\"conffile\">");
-				while(fgets(buf, 256, fp)){
-					printstr(&pp, buf);
+				while(fgets(buf2, 256, fp)){
+					printstr(&pp, buf2);
 				}
 				if(!writable) fclose(fp);
 				printstr(&pp, "</textarea><br><input type=\"Submit\"></form>");

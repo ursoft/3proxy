@@ -78,9 +78,9 @@ struct symbol symbols[] = {
 };
 
 static void * findbyname(const char *name){
-	struct symbol * symbols;
-	for(symbols = &pluginlink.symbols; symbols; symbols=symbols->next)
-		if(!strcmp(symbols->name, name)) return symbols->value;
+	struct symbol *lsymbols;
+	for(lsymbols = &pluginlink.symbols; lsymbols; lsymbols=symbols->next)
+		if(!strcmp(lsymbols->name, name)) return lsymbols->value;
 	return NULL;
 }
 
