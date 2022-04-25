@@ -144,7 +144,11 @@ void daemonize(void);
 #define myalloc malloc
 #define myfree free
 #define myrealloc realloc
+#ifdef __linux__
+#define mystrdup strdup
+#else
 #define mystrdup _strdup
+#endif
 
 extern RESOLVFUNC resolvfunc;
 
